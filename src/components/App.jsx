@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { FormStyle, Label, Input, SubmitBtn } from './App.styled';
 
 export class App extends Component {
