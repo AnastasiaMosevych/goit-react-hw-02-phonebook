@@ -8,6 +8,7 @@ import nextId from "react-id-generator";
 export class App extends Component {
   state = {
     contacts: [],
+    filter: '',
     name: '',
     number: ''
   }
@@ -54,8 +55,8 @@ export class App extends Component {
         </div>
         <SubmitBtn type="submit">Add contact</SubmitBtn>
         </FormStyle>
-        <Title title="Contacts"/>
-        <ContactsRender contacts={this.state.contacts} />
+        <Title title="Contacts" />
+        <ContactsRender contacts={this.state.contacts} filter={this.state.filter} handleChange={this.handleChange} />
         </>
   );
   }
