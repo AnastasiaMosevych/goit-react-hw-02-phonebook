@@ -12,8 +12,10 @@ export class ContactsRender extends Component {
                 {contacts.map((contact) => {
                     if (filter==="" || contact.name.toLowerCase().includes(filter.toLowerCase())) {
                         return <ListItem key={contact.id}>{contact.name}: {contact.number}</ListItem>
+                    } else {
+                        return null;
                     }
-                }
+                }  
                 )} 
             </ContactsList>
         </Container>
