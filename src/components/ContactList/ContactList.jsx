@@ -1,17 +1,15 @@
 import { Component } from "react";
-import { Container, ContactsList, ListItem } from "./Contacts.styled";
-import { SearchInput } from "./SearchInput";
+import { Container, ContactsList } from "./ContactList.styled";
+import { ContactListItem } from "./ListItem";
 
-
-export class ContactsRender extends Component {
+export class ContactList extends Component {
     render() {
-        const { contacts, filter, handleChange } = this.props;
+        const { contacts, filter } = this.props;
         return <Container>
-            <SearchInput filter={filter} handleChange={handleChange}/>
             <ContactsList>
                 {contacts.map((contact) => {
                     if (filter==="" || contact.name.toLowerCase().includes(filter.toLowerCase())) {
-                        return <ListItem key={contact.id}>{contact.name}: {contact.number}</ListItem>
+                        return <ContactListItem key={contact.id} contact={contact}/>
                     } else {
                         return null;
                     }
