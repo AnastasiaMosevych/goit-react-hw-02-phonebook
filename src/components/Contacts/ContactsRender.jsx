@@ -1,16 +1,16 @@
 import { Component } from "react";
-import { ContactsList } from "./Contacts.styled";
+import { Container, ContactsList, ListItem } from "./Contacts.styled";
 
 
 export class ContactsRender extends Component {
     render() {
         const { contacts } = this.props;
-        return <>
+        return <Container>
             <ContactsList>
                 {contacts.map(contact => ( 
-                    <li key={contact.id}>{contact.name}</li>
+                    <ListItem key={contact.id}>{contact.name}: {contact.number}</ListItem>
                 ))}  
             </ContactsList>
-        </>
+        </Container>
     }
 }

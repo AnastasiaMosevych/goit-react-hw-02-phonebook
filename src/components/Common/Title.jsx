@@ -1,5 +1,7 @@
+import { TitleStyled } from "./TitleStyled.styled"
+
 export const Title = ({ title }) => {
     return <>
-        <h1 className='title'>{title}</h1>
+        <TitleStyled>{title}</TitleStyled>
     </>
 }
