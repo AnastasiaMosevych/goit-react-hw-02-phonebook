@@ -13,9 +13,19 @@ export class App extends Component {
   }
 
   updateContacts = ({ name, number }) => {
-    this.setState((prevState) => ({
-      contacts: [...prevState.contacts, { name, number, id: nextId() }],
-    }))
+    let contactIsNew = true;
+    this.state.contacts.forEach((contact) => {
+      if (name.toLowerCase() === contact.name.toLowerCase()) {
+        contactIsNew = false;
+      }  
+    })
+    if (contactIsNew === false) {
+        return alert(`${name} is already in contacts`)
+    } else {
+        this.setState((prevState) => ({
+        contacts: [...prevState.contacts, { name, number, id: nextId() }],
+      }))
+      }      
   }
 
   updateFilter = ({ target }) => {
