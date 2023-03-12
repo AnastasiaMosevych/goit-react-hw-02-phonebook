@@ -5,6 +5,7 @@ import { PhonebookForm } from "./Phonebook/Phonebook";
 import { Filter } from "./Filter/Filter";
 import { Container } from "./ContactList/ContactList.styled";
 import nextId from "react-id-generator";
+import PropTypes from 'prop-types';
 
 export class App extends Component {
   state = {
@@ -12,7 +13,7 @@ export class App extends Component {
     filter: '',
   }
 
-  updateContacts = ({ name, number }) => {
+  addContacts = ({ name, number }) => {
     let contactIsNew = true;
     this.state.contacts.forEach((contact) => {
       if (name.toLowerCase() === contact.name.toLowerCase()) {
@@ -28,6 +29,15 @@ export class App extends Component {
       }      
   }
 
+  deleteContact = (e) => {
+    e.preventDefault();
+    let idToRemove = e.target.value;
+    let filteredContacts = this.state.contacts.filter((contact) => contact.id !== idToRemove);
+    this.setState({
+      contacts: filteredContacts,
+    })
+    }
+
   updateFilter = ({ target }) => {
     this.setState({
       [target.name]: target.value
@@ -38,11 +48,19 @@ export class App extends Component {
     return (
       <Container>
         <Title title="Phonebook" />
-        <PhonebookForm updateContacts={this.updateContacts} />
+        <PhonebookForm addContacts={this.addContacts} />
         <Title title="Contacts" />
         <Filter updateFilter={this.updateFilter}/>
-        <ContactList contacts={this.state.contacts} filter={this.state.filter} updateFilter={this.updateFilter} />
+        <ContactList contacts={this.state.contacts} filter={this.state.filter} updateFilter={this.updateFilter} deleteContact={this.deleteContact} />
       </Container>
   );
   }
 };
+
+App.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }))
+}

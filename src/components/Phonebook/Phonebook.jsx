@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { FormStyle, Label, Input, SubmitBtn } from './Phonebook.styled';
+import PropTypes from 'prop-types';
 
 
 export class PhonebookForm extends Component {
@@ -16,7 +17,7 @@ export class PhonebookForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.updateContacts({ ...this.state });
+        this.props.addContacts({ ...this.state });
         this.setState({
             name: "",
             number: "",
@@ -48,8 +49,10 @@ export class PhonebookForm extends Component {
             <SubmitBtn type="submit">Add contact</SubmitBtn>
         </div>
             </FormStyle>
-       
         )
     }
-    
+}
+
+PhonebookForm.propTypes = {
+   addContacts: PropTypes.func.isRequired,
 }

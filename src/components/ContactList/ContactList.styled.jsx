@@ -2,11 +2,10 @@ import styled from "@emotion/styled"
 
 export const Container = styled.div`
     margin: 30px auto;
-    max-width: 500px;
+    max-width: 700px;
 ` 
 
 export const ContactsList = styled.ul`
-    text-align: center;
     list-style-position: inside;
     font-size: 24px;
     font-family: font-family: Georgia, "Times New Roman", Times, serif;
