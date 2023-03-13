@@ -5,17 +5,12 @@ import PropTypes from 'prop-types';
 
 export class ContactList extends Component {
     render() {
-        const { contacts, filter, deleteContact } = this.props;
+        const { deleteContact, contacts } = this.props;
         return <Container>
             <ContactsList>
                 {contacts.map((contact) => {
-                    if (filter==="" || contact.name.toLowerCase().includes(filter.toLowerCase())) {
-                        return <ContactListItem key={contact.id} contact={contact} deleteContact={deleteContact} />
-                    } else {
-                        return null;
-                    }
-                }  
-                )} 
+                   return <ContactListItem key={ contact.id } contact={contact} deleteContact={deleteContact} />
+                })}
             </ContactsList>
         </Container>
     }
@@ -25,9 +20,9 @@ ContactList.propTypes = {
     contacts: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
             id: PropTypes.string.isRequired,
             })),
-    filter: PropTypes.string.isRequired,
     deleteContact: PropTypes.func.isRequired,
         
 }

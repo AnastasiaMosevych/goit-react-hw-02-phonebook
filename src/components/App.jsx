@@ -5,7 +5,6 @@ import { PhonebookForm } from "./Phonebook/Phonebook";
 import { Filter } from "./Filter/Filter";
 import { Container } from "./ContactList/ContactList.styled";
 import nextId from "react-id-generator";
-import PropTypes from 'prop-types';
 
 export class App extends Component {
   state = {
@@ -36,7 +35,17 @@ export class App extends Component {
     this.setState({
       contacts: filteredContacts,
     })
-    }
+  }
+  
+  filterContacts = (contacts, filter) => {
+    let filteredContacts = [];
+    contacts.forEach((contact) => {
+      if (filter === "" || contact.name.toLowerCase().includes(filter.toLowerCase())) {
+        filteredContacts.push(contact);
+        } 
+      })
+    return filteredContacts;
+  } 
 
   updateFilter = ({ target }) => {
     this.setState({
@@ -50,17 +59,12 @@ export class App extends Component {
         <Title title="Phonebook" />
         <PhonebookForm addContacts={this.addContacts} />
         <Title title="Contacts" />
-        <Filter updateFilter={this.updateFilter}/>
-        <ContactList contacts={this.state.contacts} filter={this.state.filter} updateFilter={this.updateFilter} deleteContact={this.deleteContact} />
+        <Filter updateFilter={this.updateFilter} filter={this.state.filter} />
+        <ContactList
+          contacts={this.filterContacts(this.state.contacts, this.state.filter)}
+          deleteContact={this.deleteContact} />
       </Container>
   );
   }
 };
 
-App.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }))
-}
